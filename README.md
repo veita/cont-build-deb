@@ -31,14 +31,18 @@ run
 
 ## Run the container
 
-Run the container interactively.
+Run the container interactively. For SSH access you might want to make
+your SSH keys accessible from inside the container. E.g.
 
 ```bash
+alias podman = docker
+
+# change to the project working directory
 cd $WORKING_DIR
 
 podman run --rm -it \
  --mount type=bind,source="`pwd`",target=/qsk \
- --mount type=bind,source=~/.ssh,target="$HOME/.ssh",ro=true \
+ --mount type=bind,source="$HOME/.ssh",target="/root/.ssh",ro=true \
  localhost/build-deb-debian:bullseye
 ```
 
